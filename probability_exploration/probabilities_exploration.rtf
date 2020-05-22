@@ -1,0 +1,64 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2512
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww15820\viewh16900\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ## Probabilities\
+\
+Based on the 14k Wiki dataset used in the beginning. \
+\
+### p(next-event-word | event-word) for IED docs  \
+\
+* Most likely direct event chains for a key IED event // Most likely direct chain for key Coup event\
+** Ex. 
+\f1\b murder
+\f0\b0 , take, make, make, make // 
+\f1\b murder
+\f0\b0 , find, accord, send, send\
+** Ex. amount, disown, escort, subsequently, 
+\f1\b murder 
+\f0\b0  // result, permit, save, bore, 
+\f1\b murder
+\f0\b0 \
+\
+* Probability of interesting events occurring in a direct sequence IED // \'93 Coup\
+** Ex. make, travel, bomb: 2.77 * 10e-5 // 0.0\
+** Ex. make, travel, attack: 0.0003 // 0.0\
+** Ex. plan, bomb: 0.0 // 0.0\
+\
+* Probability of interesting events occurring in any sequence\
+** Ex. plan, attack: 0.011\
+** Ex. plan, bomb -> plan, kill, bomb: 0.001\
+\
+* Notes: \
+** Direct event chains give mixed results, as we have been seeing from the visualizations produced on TEAR data. Looking closer at \'93interesting\'94 events, there are usually instances of them occurring in a direct sequences, but with very, very low probability. This backs up the idea that direct sequences may not provide the best information. \
+** However, it does seem that if we expand the space in-between \'93interesting\'94 events, we see that, for example, \'93plan\'94 does lead to \'93bomb\'94 (through the event \'93kill\'94) with a probability that is not infinitesimal, but obviously still small. \
+** Schema generation from direct sequence chains does not appear to be a viable approach to generating valuable sequences. This leads us back to the question of how do we decide what is important and look for those chains in the data?\
+\
+### p(event-word | IED doc)\
+\
+* Most common events for IED docs // Most common events for Coup docs\
+** become: 0.456 // become: 0.494\
+** take: 0.451 // take: 0.552\
+** make: 0.440 // make: 0.417\
+** begin: 0.416 // lead: 0.472\
+** have: 0.393 // arrest: 0.411\
+\
+* Probability of important events in IED docs // p(important events) in Coup docs\
+** murder: 0.035 // 0.052\
+** meet: 0.16 // 0.232\
+** bomb: 0.36 // 0.028\
+** train: 0.088 // 0.028\
+** attack: 0.143 // 0.144\
+\
+* Notes: \
+** Most common events for IED docs seem like they would be the most common events for any article in general. I think this was expected, as these verb connecting events appear so frequently compared to \'93attack\'94-like events, even in a domain that deals frequently with attack. This might be worth confirming with the coup dataset or another dataset I can pull out quickly. \
+** I was surprised to see the low probability of \'93meet\'92 and \'93attack\'94 occurring in the IED docs. I think this is due to the noisy data that we found previously in the 14k dataset. I think using the focused dataset or the Wiki API created dataset will give higher probabilities. \
+\
+### To Do \
+* Run these stats on Wiki API created dataset and coup dataset\
+* Get larger more generalized dataset (Alex is already working on this, I believe)\
+\
+}
