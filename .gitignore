@@ -1,3 +1,5 @@
 data/
 __pycache/
 compare_sequences/
+.vscode/
+.DS_Store
